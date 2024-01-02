@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from server.database import MongoDB
 
 # routers
-from server.routes.account import router as UserRouter
+from server.routes.account import router as AccountRouter
 
 app = FastAPI()
 
@@ -18,8 +18,8 @@ db_password = os.getenv('MONGODB_PASSWORD')
 database = MongoDB(db_username, db_password).connect(db_name)
 
 # routers path (include)
-app.include_router(UserRouter, tags=['User'], prefix="/user")
+app.include_router(AccountRouter, tags=['User'], prefix="/user")
 
 @app.get("/", tags=["Root"])
-def read_root():
+def root():
     return {"message": "Welcome to this fantastic app!"}

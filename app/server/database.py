@@ -1,19 +1,18 @@
-import os
 from pymongo import MongoClient
-from dotenv import load_dotenv
 
-load_dotenv()
+class MongoDB:
+    def __init__(self, username, password) -> None:
+        self.username = username
+        self.password = password
+        self.uri = f"mongodb+srv://{self.username}:{self.password}@cluster0.iee1y.mongodb.net/?retryWrites=true&w=majority"
 
-username = os.getenv('MONGODB_USERNAME')
-password = os.getenv('MONGODB_PASSWORD')
+    def connect(self):
+        return MongoClient(self.uri)
+    
+    def test_connection(self):
+        try:
+            MongoClient(self.uri).admin.command('ping')
+            print('Successfully pinged !')
+        except Exception as e:
+            print(e)
 
-uri = f"mongodb+srv://{username}:{password}@cluster0.iee1y.mongodb.net/?retryWrites=true&w=majority"
-client = MongoClient(uri)
-
-try:
-    client.admin.command('ping')
-except Exception as e:
-    print(e)
-
-db = client.Yucode
-menu_collection = db.get_collection('Menu')

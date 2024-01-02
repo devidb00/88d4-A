@@ -14,7 +14,7 @@ load_dotenv()
 # Database connection
 db_username = os.getenv('MONGODB_USERNAME')
 db_password = os.getenv('MONGODB_PASSWORD')
-database = MongoDB(db_username, db_password).connect()
+database = MongoDB(db_username, db_password).connect('Yucode')
 
 # routers path (include)
 app.include_router(UserRouter, tags=['User'], prefix="/user")

@@ -3,6 +3,6 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.get('/')
-def get_user():
+@router.post('/')
+def get_user(user):
     return { "msg": "No user find !" }

@@ -6,8 +6,8 @@ class MongoDB:
         self.password = password
         self.uri = f"mongodb+srv://{self.username}:{self.password}@cluster0.iee1y.mongodb.net/?retryWrites=true&w=majority"
 
-    def connect(self):
-        return MongoClient(self.uri)
+    def connect(self, database):
+        return MongoClient(self.uri).get_database(database)
     
     def test_connection(self):
         try:

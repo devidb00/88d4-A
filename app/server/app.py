@@ -1,3 +1,4 @@
+import logging
 from fastapi import FastAPI
 from server.config import settings
 from server.database import MongoDB
@@ -16,7 +17,7 @@ async def lifespan(app: FastAPI):
         app.mongodb_client = MongoDB(db_username, db_password)
         app.database = app.mongodb_client.connect(db_name)
 
-        print("Connected to the MongoDB database!")
+        logging.info("Connected to the MongoDB database!")
     except Exception as e:
         print(e)
 

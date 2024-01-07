@@ -19,10 +19,10 @@ async def lifespan(app: FastAPI):
 
         logging.info("Connected to the MongoDB database!")
     except Exception as e:
-        print(e)
+        logging.error(e)
 
     yield
-    print("Connection failed. Check DB credentials!")
+    logging.error("Connection failed. Check DB credentials!")
 
 app = FastAPI(lifespan=lifespan)
 

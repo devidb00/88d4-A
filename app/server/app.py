@@ -5,6 +5,7 @@ from server.database import mongodb_db
 from contextlib import asynccontextmanager
 # routers
 from server.routes.account import router as AccountRouter
+from server.routes.account import router as OrderRouter
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -21,5 +22,6 @@ app = FastAPI(lifespan=lifespan)
 
 # routers path
 app.include_router(AccountRouter, tags=['Account'], prefix="/api/account")
+app.include_router(OrderRouter, tags=['Order'], prefix="/api/order")
 
 

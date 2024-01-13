@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField
+from mongoengine import *
 
 class AccountSchema(Document):
     name: str     = StringField(required=True)

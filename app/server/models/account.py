@@ -1,3 +1,7 @@
-from app.main import app
+from bson.json_util import dumps
+from bson.objectid import ObjectId
+from server.database import mongodb_db
 
-database = app.database
+def find_account(id):
+    collection = mongodb_db.db.get_collection('Menu')
+    return dumps(collection.find({ '_id': ObjectId(id) }))

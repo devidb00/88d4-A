@@ -1,7 +1,6 @@
-from typing import Optional
 from pydantic import BaseModel
 from fastapi import APIRouter, Response
-from server.schemas.account import AccountSchema
+from server.models.account import find_account
 
 router = APIRouter()
 
@@ -9,9 +8,7 @@ class Account(BaseModel):
     name: str
     email: str
     password: str
-    e: str = None
 
-@router.post('/')
-def account_root(data: Account):
-    print(data)
-    return Response("Text", media_type="application/json")
+@router.get('/')
+def account_root(id: str):
+    return Response(content=find_account(id), media_type="application/json", status_code=200)

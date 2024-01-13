@@ -10,16 +10,17 @@ from server.routes.account import router as AccountRouter
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Database connection
-    db_name = settings.mongodb_name
+    db_name     = settings.mongodb_name
     db_username = settings.mongodb_username
     db_password = settings.mongodb_password
 
     try:
         app.mongodb_client = MongoDB(db_username, db_password)
-        app.database = app.mongodb_client.connect(db_name)
+        app.database = app.mongodb_client.connect_db(db_name)
 
         logging.info("Connected to the MongoDB database!")
-        print(app.__dict__)
+
+        print(app.database)
     except Exception as e:
         logging.error(e)
 

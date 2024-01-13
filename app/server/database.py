@@ -1,4 +1,4 @@
-from pymongo import MongoClient
+from mongoengine import connect
 
 class MongoDB:
     def __init__(self, username, password) -> None:
@@ -6,12 +6,5 @@ class MongoDB:
         self.password = password
         self.uri = f"mongodb+srv://{self.username}:{self.password}@cluster0.iee1y.mongodb.net/?retryWrites=true&w=majority"
 
-    def connect(self, database):
-        return MongoClient(self.uri).get_database(database)
-    
-    def test_connection(self):
-        try:
-            MongoClient(self.uri).admin.command('ping')
-            print('Successfully pinged !')
-        except Exception as e:
-            print(e)
+    def connect_db(self, database):
+        return connect(host=f'{self.uri}/{database}')

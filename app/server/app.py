@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from server.config import settings
 from server.database import MongoDB
 from contextlib import asynccontextmanager
+
 # routers
 from server.routes.account import router as AccountRouter
 
@@ -18,6 +19,7 @@ async def lifespan(app: FastAPI):
         app.database = app.mongodb_client.connect(db_name)
 
         logging.info("Connected to the MongoDB database!")
+        print(app.__dict__)
     except Exception as e:
         logging.error(e)
 
